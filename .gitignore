@@ -209,5 +209,6 @@ $RECYCLE.BIN/
 
 # Custom ignores
 /notes.txt
+/public/
 
 # End of https://www.gitignore.io/api/node,sass,react,linux,macos,windows,visualstudiocode
