@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MadOgre/react-boilerplate-2020#readme",
   "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^3.2.0",
     "raw-loader": "^4.0.0",
     "webpack": "^4.41.6",
