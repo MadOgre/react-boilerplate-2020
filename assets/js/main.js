@@ -1,4 +1,5 @@
 import Test2 from "./test";
+import "./test.scss";
 
 const test = async () => {
   return await 2;

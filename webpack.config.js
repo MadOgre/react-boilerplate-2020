@@ -17,9 +17,6 @@ module.exports = {
   mode: "production",
   module: {
     rules: [{
-      test: /\.ejs$/,
-      loader: "raw-loader"
-    }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       use: {
@@ -36,6 +33,15 @@ module.exports = {
           ]
         }
       }
+    }, {
+      test: /\.s?css$/,
+      use: [{
+        loader: "style-loader"
+      }, {
+        loader: "css-loader",
+      }, {
+        loader: "sass-loader",
+      }]
     }]
   },
   resolve: {
