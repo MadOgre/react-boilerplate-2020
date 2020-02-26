@@ -12,7 +12,27 @@ module.exports = {
     rules: [{
       test: /\.ejs$/,
       loader: "raw-loader"
+    }, {
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      use: {
+        loader: "babel-loader",
+        options: {
+          cacheDirectory: true,
+          presets: [
+            ["@babel/preset-env", {modules: false, useBuiltIns: "usage", corejs: {version: 3, proposals: true}}],
+            "@babel/preset-react"
+          ],
+          plugins: [
+            ["@babel/plugin-proposal-decorators",{legacy: true}],
+            ["@babel/plugin-proposal-class-properties", {loose: true}]
+          ]
+        }
+      }
     }]
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
   },
   devServer: {
     clientLogLevel: "silent",
@@ -26,6 +46,7 @@ module.exports = {
     port: 4000,
     stats: "errors-only"
   },
+  devtool: "source-map",
   plugins: [
     htmlWebpackPlugin
   ]
