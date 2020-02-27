@@ -49,6 +49,31 @@ module.exports = {
           sourceMap: true,
           resources: join(__dirname, "assets", "scss", "variables.scss")
         }
+      }],
+      exclude: /\.module\.s?css$/
+    }, {
+      test: /\.module\.s?css$/,
+      use: [{
+        loader: "style-loader"
+      }, {
+        loader: "css-loader",
+        options: {
+          sourceMap: true,
+          modules: {
+            localIdentName: "[path][name]__[local]--[hash:base64:5]",
+          }
+        }
+      }, {
+        loader: "sass-loader",
+        options: {
+          sourceMap: true
+        }
+      }, {
+        loader: "sass-resources-loader",
+        options: {
+          sourceMap: true,
+          resources: join(__dirname, "assets", "scss", "variables.scss")
+        }
       }]
     }]
   },

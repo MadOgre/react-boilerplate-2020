@@ -1,5 +1,5 @@
 import Test2 from "./test";
-
+import "./test.module.scss";
 const test = async () => {
   return await 2;
 };

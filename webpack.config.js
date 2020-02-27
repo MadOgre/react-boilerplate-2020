@@ -46,6 +46,26 @@ module.exports = {
         options: {
           resources: join(__dirname, "assets", "scss", "variables.scss")
         }
+      }],
+      exclude: /\.module\.s?css$/
+    }, {
+      test: /\.module\.s?css$/,
+      use: [{
+        loader: "style-loader"
+      }, {
+        loader: "css-loader",
+        options: {
+          modules: {
+            localIdentName: "[path][name]__[local]--[hash:base64:5]",
+          }
+        }
+      }, {
+        loader: "sass-loader",
+      }, {
+        loader: "sass-resources-loader",
+        options: {
+          resources: join(__dirname, "assets", "scss", "variables.scss")
+        }
       }]
     }]
   },
