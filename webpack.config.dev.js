@@ -6,7 +6,7 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 
 module.exports = {
   context: __dirname,
-  entry: ["./assets/index.ejs", "./assets/js/main.js"],
+  entry: ["./assets/index.ejs", "./assets/scss/global.scss", "./assets/js/main.js"],
   mode: "development",
   module: {
     rules: [{
@@ -42,6 +42,12 @@ module.exports = {
         loader: "sass-loader",
         options: {
           sourceMap: true
+        }
+      }, {
+        loader: "sass-resources-loader",
+        options: {
+          sourceMap: true,
+          resources: join(__dirname, "assets", "scss", "variables.scss")
         }
       }]
     }]

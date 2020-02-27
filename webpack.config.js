@@ -8,7 +8,7 @@ const cleanWebpackPlugin = new CleanWebpackPlugin();
 
 module.exports = {
   context: __dirname,
-  entry: "./assets/js/main.js",
+  entry: ["./assets/scss/global.scss", "./assets/js/main.js"],
   output: {
     hashDigestLength: 8,
     path: join(__dirname, "public"),
@@ -41,6 +41,11 @@ module.exports = {
         loader: "css-loader",
       }, {
         loader: "sass-loader",
+      }, {
+        loader: "sass-resources-loader",
+        options: {
+          resources: join(__dirname, "assets", "scss", "variables.scss")
+        }
       }]
     }]
   },
