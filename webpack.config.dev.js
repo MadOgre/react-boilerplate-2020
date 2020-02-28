@@ -39,6 +39,11 @@ module.exports = {
           sourceMap: true
         }
       }, {
+        loader: "postcss-loader",
+        options: {
+          sourceMap: true
+        }
+      }, {
         loader: "sass-loader",
         options: {
           sourceMap: true
@@ -62,6 +67,11 @@ module.exports = {
           modules: {
             localIdentName: "[path][name]__[local]--[hash:base64:5]",
           }
+        }
+      }, {
+        loader: "postcss-loader",
+        options: {
+          sourceMap: true
         }
       }, {
         loader: "sass-loader",
@@ -94,6 +104,6 @@ module.exports = {
   },
   devtool: "source-map",
   plugins: [
-    htmlWebpackPlugin
+    htmlWebpackPlugin,
   ]
 };
