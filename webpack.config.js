@@ -10,6 +10,7 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
   filename: "[name].[contenthash].css",
   chunkFilename: "[id].[contenthash].css",
 });
+const webpack = require("webpack");
 
 module.exports = {
   context: __dirname,
@@ -81,9 +82,11 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
   },
+  devtool: false,
   plugins: [
     htmlWebpackPlugin,
     cleanWebpackPlugin,
-    miniCssExtractPlugin
+    miniCssExtractPlugin,
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/)
   ]
 };
