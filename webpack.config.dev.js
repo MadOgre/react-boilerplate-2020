@@ -6,7 +6,7 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 
 module.exports = {
   context: __dirname,
-  entry: ["./assets/index.ejs", "./assets/scss/global.scss", "./assets/js/main.js"],
+  entry: ["./assets/index.ejs", "normalize.css", "./assets/scss/global.scss", "./assets/js/main.js"],
   mode: "development",
   module: {
     rules: [{

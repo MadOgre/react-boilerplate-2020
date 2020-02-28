@@ -14,7 +14,7 @@ const webpack = require("webpack");
 
 module.exports = {
   context: __dirname,
-  entry: ["./assets/scss/global.scss", "./assets/js/main.js"],
+  entry: ["normalize.css", "./assets/scss/global.scss", "./assets/js/main.js"],
   output: {
     hashDigestLength: 8,
     path: join(__dirname, "public"),
