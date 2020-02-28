@@ -5,6 +5,11 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: join(__dirname, "assets", "index.ejs")
 });
 const cleanWebpackPlugin = new CleanWebpackPlugin();
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const miniCssExtractPlugin = new MiniCssExtractPlugin({
+  filename: "[name].[contenthash].css",
+  chunkFilename: "[id].[contenthash].css",
+});
 
 module.exports = {
   context: __dirname,
@@ -36,7 +41,7 @@ module.exports = {
     }, {
       test: /\.s?css$/,
       use: [{
-        loader: "style-loader"
+        loader: MiniCssExtractPlugin.loader
       }, {
         loader: "css-loader",
       }, {
@@ -53,7 +58,7 @@ module.exports = {
     }, {
       test: /\.module\.s?css$/,
       use: [{
-        loader: "style-loader"
+        loader: MiniCssExtractPlugin.loader
       }, {
         loader: "css-loader",
         options: {
@@ -78,6 +83,7 @@ module.exports = {
   },
   plugins: [
     htmlWebpackPlugin,
-    cleanWebpackPlugin
+    cleanWebpackPlugin,
+    miniCssExtractPlugin
   ]
 };
