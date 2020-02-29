@@ -11,6 +11,11 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
   chunkFilename: "[id].[contenthash].css",
 });
 const webpack = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
+const copyPlugin = new CopyPlugin([{
+  from: "assets/icons",
+  to: "icons"
+}]);
 
 module.exports = {
   context: __dirname,
@@ -95,6 +100,7 @@ module.exports = {
     htmlWebpackPlugin,
     cleanWebpackPlugin,
     miniCssExtractPlugin,
-    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/)
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
+    copyPlugin
   ]
 };
