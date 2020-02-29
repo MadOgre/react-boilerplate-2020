@@ -4,6 +4,8 @@ const test = async () => {
   return await 2;
 };
 
+import tieDefender from "../img/tie_defender.png";
+
 test().then(value => console.log(value));
 
 console.log("this works2");

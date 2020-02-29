@@ -1,4 +1,13 @@
+@font-face {
+  font-family: "Paris Helen";
+  src: url("../fonts/paris_helen.ttf") format("truetype")
+}
+
 body {
   background-color: $mycolor;
   user-select: none;
+}
+
+h1 {
+  font-family: "Paris Helen"
 }

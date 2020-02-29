@@ -85,6 +85,15 @@ module.exports = {
           resources: join(__dirname, "assets", "scss", "variables.scss")
         }
       }]
+    }, {
+      test: /\.(png|jpe?g|svg|gif|eot|ttf|woff|woff2)$/,
+      use: {
+        loader: "file-loader",
+        options: {
+          name: "[folder]/[name].[ext]",
+          emitFile: false
+        }
+      }
     }]
   },
   resolve: {
