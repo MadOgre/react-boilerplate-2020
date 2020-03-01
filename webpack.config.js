@@ -85,6 +85,11 @@ module.exports = {
     }]
   },
   resolve: {
+    alias: {
+      "@approot": __dirname,
+      "@appRoot": __dirname,
+      "@app": join(__dirname, "app")
+    },
     extensions: [".js", ".jsx"],
   },
   devtool: false,
