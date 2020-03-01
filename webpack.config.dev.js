@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: join(__dirname, "assets", "index.ejs")
 });
+const webpack = require("webpack");
 
 module.exports = {
   context: __dirname,
@@ -114,5 +115,8 @@ module.exports = {
   devtool: "source-map",
   plugins: [
     htmlWebpackPlugin,
+    new webpack.ProvidePlugin({
+      React: "react"
+    })
   ]
 };

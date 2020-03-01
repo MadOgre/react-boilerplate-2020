@@ -101,6 +101,9 @@ module.exports = {
     cleanWebpackPlugin,
     miniCssExtractPlugin,
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
-    copyPlugin
+    copyPlugin,
+    new webpack.ProvidePlugin({
+      React: "react"
+    })
   ]
 };

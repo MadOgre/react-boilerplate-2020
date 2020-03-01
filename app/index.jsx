@@ -1,4 +1,3 @@
-import React from "react";
 import rootStyles from "./test.module.scss";
 
 const Root = () => (
