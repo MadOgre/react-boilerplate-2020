@@ -33,15 +33,7 @@ module.exports = {
       use: {
         loader: "babel-loader",
         options: {
-          cacheDirectory: true,
-          presets: [
-            ["@babel/preset-env", {modules: false, useBuiltIns: "usage", corejs: {version: 3, proposals: true}}],
-            "@babel/preset-react"
-          ],
-          plugins: [
-            ["@babel/plugin-proposal-decorators",{legacy: true}],
-            ["@babel/plugin-proposal-class-properties", {loose: true}]
-          ]
+          cacheDirectory: true
         }
       }
     }, {
