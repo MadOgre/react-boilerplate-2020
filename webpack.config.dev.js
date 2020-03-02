@@ -1,9 +1,13 @@
 const { join } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const StylelintPlugin = require("stylelint-webpack-plugin");
+
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: join(__dirname, "assets", "index.ejs")
 });
-const webpack = require("webpack");
+const styleLintPlugin = new StylelintPlugin();
+
 
 module.exports = {
   context: __dirname,
@@ -16,12 +20,18 @@ module.exports = {
     }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      use: {
+      use: [{
         loader: "babel-loader",
         options: {
           cacheDirectory: true
         }
-      }
+      }, {
+        loader: "eslint-loader",
+        options: {
+          failOnWarning: true,
+          failOnError: true
+        }
+      }]
     }, {
       test: /\.s?css$/,
       use: [{
@@ -114,6 +124,7 @@ module.exports = {
     htmlWebpackPlugin,
     new webpack.ProvidePlugin({
       React: "react"
-    })
+    }),
+    styleLintPlugin
   ]
 };
