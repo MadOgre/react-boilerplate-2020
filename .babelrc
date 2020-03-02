@@ -1,5 +1,4 @@
 {
-  // "cacheDirectory": true,
   "presets": [
     [
       "@babel/preset-env",

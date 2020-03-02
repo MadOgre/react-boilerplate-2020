@@ -1,17 +1,18 @@
 const { join } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
+
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: join(__dirname, "assets", "index.ejs")
 });
 const cleanWebpackPlugin = new CleanWebpackPlugin();
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
   filename: "[name].[contenthash].css",
   chunkFilename: "[id].[contenthash].css",
 });
-const webpack = require("webpack");
-const CopyPlugin = require("copy-webpack-plugin");
 const copyPlugin = new CopyPlugin([{
   from: "assets/icons",
   to: "icons"
@@ -30,12 +31,18 @@ module.exports = {
     rules: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      use: {
+      use: [{
         loader: "babel-loader",
         options: {
           cacheDirectory: true
         }
-      }
+      }, {
+        loader: "eslint-loader",
+        options: {
+          failOnWarning: true,
+          failOnError: true
+        }
+      }]
     }, {
       test: /\.s?css$/,
       use: [{
