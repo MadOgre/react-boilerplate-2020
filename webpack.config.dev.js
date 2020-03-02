@@ -1,10 +1,12 @@
 const { join } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const StylelintPlugin = require("stylelint-webpack-plugin");
 
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: join(__dirname, "assets", "index.ejs")
 });
+const styleLintPlugin = new StylelintPlugin();
 
 
 module.exports = {
@@ -122,6 +124,7 @@ module.exports = {
     htmlWebpackPlugin,
     new webpack.ProvidePlugin({
       React: "react"
-    })
+    }),
+    styleLintPlugin
   ]
 };

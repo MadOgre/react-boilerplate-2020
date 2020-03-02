@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Paris Helen";
-  src: url("../fonts/paris_helen.ttf") format("truetype")
+  src: url("../fonts/paris_helen.ttf") format("truetype");
 }
 
 body {
@@ -9,7 +9,7 @@ body {
 }
 
 h1 {
-  font-family: "Paris Helen"
+  font-family: "Paris Helen", sans-serif;
 }
 
 html {

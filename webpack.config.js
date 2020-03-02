@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 const CopyPlugin = require("copy-webpack-plugin");
+const StylelintPlugin = require("stylelint-webpack-plugin");
 
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: join(__dirname, "assets", "index.ejs")
@@ -17,6 +18,7 @@ const copyPlugin = new CopyPlugin([{
   from: "assets/icons",
   to: "icons"
 }]);
+const styleLintPlugin = new StylelintPlugin();
 
 module.exports = {
   context: __dirname,
@@ -108,6 +110,7 @@ module.exports = {
     copyPlugin,
     new webpack.ProvidePlugin({
       React: "react"
-    })
+    }),
+    styleLintPlugin
   ]
 };
