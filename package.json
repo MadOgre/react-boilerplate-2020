@@ -5,8 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --color --config webpack.config.dev.js",
-    "build": "webpack"
+    "start:client": "webpack-dev-server --color --config webpack.config.dev.js",
+    "build:client": "webpack",
+    "start:server": "webpack --config webpack.config.server.dev.js",
+    "build:server": "webpack --config webpack.config.server.js",
+    "start": "run-p start:client start:server"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
@@ -54,6 +57,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "express": "^4.17.1",
     "fibers": "^4.0.2",
     "file-loader": "^5.1.0",
     "html-webpack-plugin": "^3.2.0",
@@ -62,6 +66,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
+    "npm-run-all": "^4.1.5",
     "postcss-loader": "^3.0.0",
     "raw-loader": "^4.0.0",
     "react": "^16.13.0",
@@ -70,12 +75,14 @@
     "sass": "^1.26.1",
     "sass-loader": "^8.0.2",
     "sass-resources-loader": "^2.0.1",
+    "start-server-webpack-plugin": "^2.2.5",
     "style-loader": "^1.1.3",
     "stylelint": "^13.2.0",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-webpack-plugin": "^1.2.3",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "webpack-node-externals": "^1.7.2"
   }
 }

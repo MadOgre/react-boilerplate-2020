@@ -210,5 +210,7 @@ $RECYCLE.BIN/
 # Custom ignores
 /notes.txt
 /public/
+/hot/
+/server.js
 
 # End of https://www.gitignore.io/api/node,sass,react,linux,macos,windows,visualstudiocode

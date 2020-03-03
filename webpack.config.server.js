@@ -1,18 +1,21 @@
 const { join } = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const StylelintPlugin = require("stylelint-webpack-plugin");
+const nodeExternals = require("webpack-node-externals");
 
-const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  template: join(__dirname, "assets", "index.ejs")
-});
 const styleLintPlugin = new StylelintPlugin();
-
 
 module.exports = {
   context: __dirname,
-  entry: ["./assets/index.ejs", "normalize.css", "./assets/scss/global.scss", "./assets/js/main.js"],
-  mode: "development",
+  entry: "./server/index.js",
+  output: {
+    path: __dirname,
+    filename: "server.js",
+  },
+  target: "node",
+  watch: true,
+  externals: [nodeExternals()],
+  mode: "production",
   module: {
     rules: [{
       test: /\.ejs$/,
@@ -37,20 +40,11 @@ module.exports = {
       use: [{
         loader: "style-loader"
       }, {
-        loader: "css-loader",
-        options: {
-          sourceMap: true
-        }
+        loader: "css-loader"
       }, {
-        loader: "postcss-loader",
-        options: {
-          sourceMap: true
-        }
+        loader: "postcss-loader"
       }, {
-        loader: "sass-loader",
-        options: {
-          sourceMap: true
-        }
+        loader: "sass-loader"
       }, {
         loader: "sass-resources-loader",
         options: {
@@ -66,25 +60,17 @@ module.exports = {
       }, {
         loader: "css-loader",
         options: {
-          sourceMap: true,
           modules: {
             localIdentName: "[path][name]__[local]--[hash:base64:5]",
           }
         }
       }, {
-        loader: "postcss-loader",
-        options: {
-          sourceMap: true
-        }
+        loader: "postcss-loader"
       }, {
-        loader: "sass-loader",
-        options: {
-          sourceMap: true
-        }
+        loader: "sass-loader"
       }, {
         loader: "sass-resources-loader",
         options: {
-          sourceMap: true,
           resources: join(__dirname, "assets", "scss", "variables.scss")
         }
       }]
@@ -107,24 +93,7 @@ module.exports = {
     },
     extensions: [".js", ".jsx"],
   },
-  devServer: {
-    clientLogLevel: "silent",
-    contentBase: join(__dirname, "assets"),
-    historyApiFallback: true,
-    host: "0.0.0.0",
-    public: "http://localhost:4000",
-    proxy: {
-      "/api/": "http://localhost:3000"
-    },
-    hot: true,
-    open: true,
-    overlay: true,
-    port: 4000,
-    stats: "errors-only"
-  },
-  devtool: "source-map",
   plugins: [
-    htmlWebpackPlugin,
     new webpack.ProvidePlugin({
       React: "react"
     }),

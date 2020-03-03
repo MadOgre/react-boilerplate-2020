@@ -1,17 +1,32 @@
 const { join } = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const StylelintPlugin = require("stylelint-webpack-plugin");
+const nodeExternals = require("webpack-node-externals");
+const StartServerPlugin = require("start-server-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  template: join(__dirname, "assets", "index.ejs")
-});
 const styleLintPlugin = new StylelintPlugin();
-
+const startServerPlugin = new StartServerPlugin({
+  name: "server.js"
+});
+const cleanWebpackPlugin = new CleanWebpackPlugin({
+  cleanOnceBeforeBuildPatterns: ["./hot/*"]
+});
 
 module.exports = {
   context: __dirname,
-  entry: ["./assets/index.ejs", "normalize.css", "./assets/scss/global.scss", "./assets/js/main.js"],
+  entry: ["webpack/hot/poll?1000", "./server/index.js"],
+  output: {
+    path: __dirname,
+    filename: "server.js",
+    hotUpdateChunkFilename: "hot/hot-update-[hash].js",
+    hotUpdateMainFilename: "hot/hot-update-[hash].json"
+  },
+  target: "node",
+  watch: true,
+  externals: [nodeExternals({
+    whitelist: ["webpack/hot/poll?1000"]
+  })],
   mode: "development",
   module: {
     rules: [{
@@ -37,24 +52,14 @@ module.exports = {
       use: [{
         loader: "style-loader"
       }, {
-        loader: "css-loader",
-        options: {
-          sourceMap: true
-        }
+        loader: "css-loader"
       }, {
-        loader: "postcss-loader",
-        options: {
-          sourceMap: true
-        }
+        loader: "postcss-loader"
       }, {
-        loader: "sass-loader",
-        options: {
-          sourceMap: true
-        }
+        loader: "sass-loader"
       }, {
         loader: "sass-resources-loader",
         options: {
-          sourceMap: true,
           resources: join(__dirname, "assets", "scss", "variables.scss")
         }
       }],
@@ -66,25 +71,17 @@ module.exports = {
       }, {
         loader: "css-loader",
         options: {
-          sourceMap: true,
           modules: {
             localIdentName: "[path][name]__[local]--[hash:base64:5]",
           }
         }
       }, {
         loader: "postcss-loader",
-        options: {
-          sourceMap: true
-        }
       }, {
         loader: "sass-loader",
-        options: {
-          sourceMap: true
-        }
       }, {
         loader: "sass-resources-loader",
         options: {
-          sourceMap: true,
           resources: join(__dirname, "assets", "scss", "variables.scss")
         }
       }]
@@ -107,27 +104,13 @@ module.exports = {
     },
     extensions: [".js", ".jsx"],
   },
-  devServer: {
-    clientLogLevel: "silent",
-    contentBase: join(__dirname, "assets"),
-    historyApiFallback: true,
-    host: "0.0.0.0",
-    public: "http://localhost:4000",
-    proxy: {
-      "/api/": "http://localhost:3000"
-    },
-    hot: true,
-    open: true,
-    overlay: true,
-    port: 4000,
-    stats: "errors-only"
-  },
-  devtool: "source-map",
   plugins: [
-    htmlWebpackPlugin,
     new webpack.ProvidePlugin({
       React: "react"
     }),
-    styleLintPlugin
+    styleLintPlugin,
+    startServerPlugin,
+    new webpack.HotModuleReplacementPlugin(),
+    cleanWebpackPlugin
   ]
 };
